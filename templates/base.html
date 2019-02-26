@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+11111
+    <form action="{% url 'get-file' %}" method="post">
+        <label for="lang">Paste file:
+            <input id="lang" type="text" name="lang" placeholder="{{ current_name }}">
+        </label>
+        <label for="file">Paste file:
+            <input id="file" type="text" name="file" value="{{ current_name }}">
+        </label>
+        <label for="link">Paste link:
+            <input id="link" type="file" name="link" value="{{ current_name }}">
+        </label>
+        <label for="code">Paste code:
+            <textarea id="code" name="code" cols="10" rows="5"></textarea>
+        </label>
+
+        <input type="submit" value="OK">
+    </form>
+
+22222
+    <form action="{% url 'get-file' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit">
+    </form>
+
+</body>
+</html>
