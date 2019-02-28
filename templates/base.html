@@ -9,28 +9,28 @@
 </head>
 <body>
 11111
-    <form action="{% url 'get-file' %}" method="post">
-        <label for="lang">Language:
-            <input id="lang" type="text" name="lang" placeholder="{{ current_name }}">
-        </label>
-        <label for="file">Paste file:
-            <input id="file" type="text" name="file" value="{{ current_name }}">
-        </label>
-        <label for="link">Paste link:
-            <input id="link" type="file" name="link" value="{{ current_name }}">
-        </label>
-        <label for="code">Paste code:
-            <textarea id="code" name="code" cols="10" rows="5"></textarea>
-        </label>
+{#    <form method="post">#}
+{#        {% csrf_token %}#}
+{#        <label for="lang">Language:#}
+{#            <input id="lang" type="text" name="lang" placeholder="Language">#}
+{#        </label>#}
+{#        <label for="file">Paste file:#}
+{#            <input id="file" type="text" name="file" placeholder="file">#}
+{#        </label>#}
+{#        <label for="link">Paste link:#}
+{#            <input id="link" type="file" name="link" placeholder="link">#}
+{#        </label>#}
+{#        <label for="code">Paste code:#}
+{#            <textarea id="code" name="code" cols="10" rows="5"></textarea>#}
+{#        </label>#}
+{##}
+{#        <button type="submit">submit</button>#}
+{#    </form>#}
 
-        <input type="submit" value="OK">
-    </form>
-
-22222
-    <form action="{% url 'get-file' %}" method="post">
+    <form method="post">
         {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Submit">
+        {{ form.as_ul }}
+        <button type="submit">submit</button>
     </form>
 
 </body>
