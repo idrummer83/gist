@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-11111
 {#    <form method="post">#}
 {#        {% csrf_token %}#}
 {#        <label for="lang">Language:#}
@@ -32,6 +31,10 @@
         {{ form.as_ul }}
         <button type="submit">submit</button>
     </form>
+
+    <div>
+        <a href="{% url 'snip_list' %}">snip list page</a>
+    </div>
 
 </body>
 </html>
