@@ -6,16 +6,22 @@
 </head>
 <body>
 
-    {% for s in snip_l %}
-        {{ s.id }} <br>
-        {{ s.snipp_name }}
-        {{ s.file }}
-        {{ s.code }}<br><br>
-    {% endfor %}
-    
     <div>
-        <a href="{% url 'get-file' %}">main paggggge</a>
+        <a href="{% url 'get-file' %}">back to main paggggge</a>
     </div>
+
+    {% for s in snip_l %}
+        <div style="margin-bottom: 15px;">
+            <h4>{{ s.snipp_name }}</h4>
+{#            <a href="{{ s.file_url }}">{{ s.snipp_name }}</a>#}
+            <a href="{% url 'snip' s.snipp_name %}">{{ s.snipp_name }}</a>
+            <div>{{ s.file_url }}</div>
+            <div style="background-color: #aaa;padding: 15px;">
+                <pre>{{ s.code|safe }}</pre>
+            </div>
+        </div>
+    {% endfor %}
+
 
 </body>
 </html>

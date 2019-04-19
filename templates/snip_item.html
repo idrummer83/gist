@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ITEM SNIP</title>
+</head>
+<body>
+
+    <div>
+        <a href="{% url 'get-file' %}">back to main paggggge</a>
+    </div>
+
+    <h1>ITEM SNIP</h1>
+
+    {% for snip in snippet %}
+        {{ snip.snipp_name }}
+        <div style="background-color: #aaa;padding: 15px;">
+            <pre>{{ snip.code|safe }}</pre>
+        </div>
+    {% endfor %}
+
+</body>
+</html>

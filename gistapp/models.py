@@ -11,6 +11,8 @@ class Snipet(models.Model):
     file = models.FileField('file', blank=True)
     link = models.CharField('link', max_length=1000, blank=True)
     visible = models.BooleanField('visibility', blank=True, default=True)
+    created = models.DateTimeField()
+    file_url = models.CharField('file_url', max_length=1000, blank=True)
 
     class Meta:
         verbose_name = 'Snipet'
