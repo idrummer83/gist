@@ -10,24 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/ace.js"></script>
 </head>
 <body>
-{#    <form method="post">#}
-{#        {% csrf_token %}#}
-{#        <label for="lang">Language:#}
-{#            <input id="lang" type="text" name="lang" placeholder="Language">#}
-{#        </label>#}
-{#        <label for="file">Paste file:#}
-{#            <input id="file" type="text" name="file" placeholder="file">#}
-{#        </label>#}
-{#        <label for="link">Paste link:#}
-{#            <input id="link" type="file" name="link" placeholder="link">#}
-{#        </label>#}
-{#        <label for="code">Paste code:#}
-{#            <textarea id="code" name="code" cols="10" rows="5"></textarea>#}
-{#        </label>#}
-{##}
-{#        <button type="submit">submit</button>#}
-{#    </form>#}
-    <form method="post">
+    <form enctype="multipart/form-data" method="post">
         {% csrf_token %}
         {{ form.as_ul }}
         <button type="submit">submit</button>
@@ -39,28 +22,28 @@
 
     <script>
         $(function() {
-  $('textarea').each(function() {
-    var textarea = $(this);
-    var mode = textarea.data('editor');
-    var editDiv = $('<div>', {
-      position: 'absolute',
-      width: textarea.width(),
-      height: textarea.height(),
-      'class': textarea.attr('class')
-    }).insertBefore(textarea);
-    textarea.css('display', 'none');
-    var editor = ace.edit(editDiv[0]);
-    editor.renderer.setShowGutter(textarea.data('gutter'));
-    editor.getSession().setValue(textarea.val());
-    editor.getSession().setMode("ace/mode/" + mode);
-    editor.setTheme("ace/theme/idle_fingers");
+          $('textarea').each(function() {
+            var textarea = $(this);
+            var mode = textarea.data('editor');
+            var editDiv = $('<div>', {
+              position: 'absolute',
+              width: textarea.width(),
+              height: textarea.height(),
+              'class': textarea.attr('class')
+            }).insertBefore(textarea);
+            textarea.css('display', 'none');
+            var editor = ace.edit(editDiv[0]);
+            editor.renderer.setShowGutter(textarea.data('gutter'));
+            editor.getSession().setValue(textarea.val());
+            editor.getSession().setMode("ace/mode/" + mode);
+            editor.setTheme("ace/theme/idle_fingers");
 
-    // copy back to textarea on form submit...
-    textarea.closest('form').submit(function() {
-      textarea.val(editor.getSession().getValue());
-    })
-  });
-});
+            // copy back to textarea on form submit...
+            textarea.closest('form').submit(function() {
+              textarea.val(editor.getSession().getValue());
+            })
+          });
+        });
     </script>
 
 </body>

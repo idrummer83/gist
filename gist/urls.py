@@ -26,7 +26,6 @@ urlpatterns = [
     path('', views.get_file, name='get-file'),
     path('snip_list', views.snip_list, name='snip_list'),
     path('<snip_slug>/', views.snip, name='snip'),
-    # path(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]
 
 if settings.DEBUG:

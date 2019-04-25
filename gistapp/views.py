@@ -9,23 +9,21 @@ def get_file(request):
     if request.method == 'POST':
         form = Download(request.POST)
         if form.is_valid():
-            # absl_url = request.build_absolute_uri
             snipp_name = form.cleaned_data['snipp_name']
             language = form.cleaned_data['language']
             code = form.cleaned_data['code']
-            file = form.cleaned_data['file']
-            link = form.cleaned_data['link']
+            # file = form.cleaned_data['file']
+            file = str(request.FILES['file'].read())
             visible = form.cleaned_data['visible']
+            print(file)
 
             snip = Snipet(
                 snipp_name=snipp_name,
                 language=language,
                 code=code,
                 file=file,
-                link=link,
                 visible=visible,
                 created=datetime.datetime.now(),
-                # file_url=absl_url + snipp_name.replace(" ", "_")
             )
             snip.save()
             return render(request, 'thanks.html', {
