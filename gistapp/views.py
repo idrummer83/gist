@@ -13,7 +13,8 @@ def get_file(request):
             language = form.cleaned_data['language']
             code = form.cleaned_data['code']
             # file = form.cleaned_data['file']
-            file = str(request.FILES['file'].read())
+            file = str(request.FILES['file'].read(), 'utf-8')
+            # file.encode('utf-8')
             visible = form.cleaned_data['visible']
             print(file)
 

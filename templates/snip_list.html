@@ -15,8 +15,10 @@
             <h2 style="margin: 0;">{{ s.snipp_name }}</h2>
 {#            <a href="{{ s.file_url }}">{{ s.snipp_name }}</a>#}
             <a href="{% url 'snip' s.snipp_name %}">{{ s.snipp_name }}</a>
-            <div style="background-color: #aaa;padding: 15px;">file = {{ s.file }}</div>
-            <div style="background-color: #aaa;padding: 15px;">
+            <div style="background-color: #aaa;padding: 15px;">file =
+                    <pre>{{ s.file|safe }}</pre>
+            </div>
+            <div style="background-color: #aaa;padding: 15px;">code =
                 <pre>{{ s.code|safe }}</pre>
             </div>
         </div>
