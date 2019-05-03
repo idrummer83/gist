@@ -1,25 +1,32 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/ace.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 </head>
 <body>
 
-    <div>
-        <a href="{% url 'get-file' %}">back to main paggggge</a>
-    </div>
+    <h3>
+        <a href="{% url 'get-file' %}">back to main page</a>
+    </h3>
 
     {% for s in snip_l %}
         <div style="margin-bottom: 15px;">
-            <h2 style="margin: 0;">{{ s.snipp_name }}</h2>
-{#            <a href="{{ s.file_url }}">{{ s.snipp_name }}</a>#}
             <a href="{% url 'snip' s.snipp_name %}">{{ s.snipp_name }}</a>
-            <div style="background-color: #aaa;padding: 15px;">file =
-                    <pre>{{ s.file|safe }}</pre>
+            {% if s.file %}
+                <div style="background-color: #aaa;padding: 15px;">uploaded file =
+                    <textarea>{{ s.file |safe }}</textarea>
             </div>
+            {% endif %}
+
             <div style="background-color: #aaa;padding: 15px;">code =
-                <pre>{{ s.code|safe }}</pre>
+{#                <pre>{{ s.code|safe }}</pre>#}
+                <textarea>{{ s.code|safe }}</textarea>
             </div>
         </div>
     {% endfor %}

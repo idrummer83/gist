@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.utils.datastructures import MultiValueDictKeyError
 import datetime
 
 from .forms import Download
@@ -12,12 +13,11 @@ def get_file(request):
             snipp_name = form.cleaned_data['snipp_name']
             language = form.cleaned_data['language']
             code = form.cleaned_data['code']
-            # file = form.cleaned_data['file']
-            file = str(request.FILES['file'].read(), 'utf-8')
-            # file.encode('utf-8')
+            try:
+                file = str(request.FILES['file'].read(), 'utf-8')
+            except MultiValueDictKeyError:
+                file = False
             visible = form.cleaned_data['visible']
-            print(file)
-
             snip = Snipet(
                 snipp_name=snipp_name,
                 language=language,
