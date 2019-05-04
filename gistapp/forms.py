@@ -1,11 +1,31 @@
 from django import forms
-from .models import Snipet
+from .models import Base, CodeSnipet, FileSnipet, UrlSnipet
 
-class Download(forms.ModelForm):
+class BaseForm(forms.ModelForm):
 
     class Meta:
-        model = Snipet
-        fields = ('snipp_name', 'language', 'code', 'file', 'visible')
-    # lang = forms.CharField(label='language', widget=forms.TextInput)
-    # code = forms.CharField(label='code', widget=forms.Textarea)
-    # file = forms.FileField(label='file', widget=forms.FileInput)
+        model = Base
+        fields = ('language', 'visible')
+
+
+class CodeSnipetForm(forms.ModelForm):
+
+    class Meta:
+        model = CodeSnipet
+        fields = ('code',)
+
+
+
+class FileSnipetForm(forms.ModelForm):
+
+    class Meta:
+        model = FileSnipet
+        fields = ('file',)
+
+
+
+class UrlSnipetForm(forms.ModelForm):
+
+    class Meta:
+        model = UrlSnipet
+        fields = ('file_url',)

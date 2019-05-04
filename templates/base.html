@@ -14,11 +14,14 @@
     <form enctype="multipart/form-data" method="post">
         {% csrf_token %}
         {{ form.as_p }}
+        {{ form0.as_p }}
+        {{ form1.as_p }}
+        {{ form2.as_p }}
         <button type="submit">submit</button>
     </form>
 
     <div>
-        <a href="{% url 'snip_list' %}">snip list page</a>
+{#        <a href="{% url 'snip_list' %}">snip list page</a>#}
     </div>
 
 </body>
