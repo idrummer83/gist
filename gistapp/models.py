@@ -11,8 +11,8 @@ class Base(models.Model):
 
 
 class UrlSnipet(models.Model):
-    base = models.ForeignKey(Base, on_delete=models.CASCADE)
-    file_url = models.CharField('file_url', max_length=1000, blank=True)
+    base = models.ForeignKey(Base, on_delete=models.CASCADE, null=True)
+    file_url = models.CharField('file_url', max_length=1000, blank=True, null=True)
 
     class Meta:
         verbose_name = 'UrlSnipet'
@@ -20,7 +20,7 @@ class UrlSnipet(models.Model):
 
 
 class FileSnipet(models.Model):
-    base = models.ForeignKey(Base, on_delete=models.CASCADE)
+    base = models.ForeignKey(Base, on_delete=models.CASCADE, null=True)
     file = models.FileField('file', blank=True, null=True, upload_to='file')
 
     class Meta:
@@ -29,8 +29,8 @@ class FileSnipet(models.Model):
 
 
 class CodeSnipet(models.Model):
-    base = models.ForeignKey(Base, on_delete=models.CASCADE)
-    code = models.TextField('code', blank=True)
+    base = models.ForeignKey(Base, on_delete=models.CASCADE, null=True)
+    code = models.TextField('code', blank=True, null=True)
 
     class Meta:
         verbose_name = 'CodeSnipet'

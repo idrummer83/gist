@@ -3,39 +3,53 @@ from django.utils.datastructures import MultiValueDictKeyError
 import datetime
 
 from .forms import BaseForm, UrlSnipetForm, CodeSnipetForm, FileSnipetForm
-from .models import UrlSnipet, CodeSnipet, FileSnipet
+from .models import Base, UrlSnipet, CodeSnipet, FileSnipet
 # Create your views here.
 
 def get_file(request):
-    # if request.method == 'POST':
-        # form = CodeSnipetForm(request.POST)
-#         if form.is_valid():
-#             snipp_name = form.cleaned_data['snipp_name']
-#             language = form.cleaned_data['language']
-#             code = form.cleaned_data['code']
-#             try:
-#                 file = str(request.FILES['file'].read(), 'utf-8')
-#             except MultiValueDictKeyError:
-#                 file = False
-#             visible = form.cleaned_data['visible']
-#             snip = Snipet(
-#                 snipp_name=snipp_name,
-#                 language=language,
-#                 code=code,
-#                 file=file,
-#                 visible=visible,
-#                 created=datetime.datetime.now(),
-#             )
-#             snip.save()
-#             return render(request, 'thanks.html', {
-#                 'path': request.build_absolute_uri,
-#                 'name': snipp_name
-#             })
-#     else:
-    form = BaseForm()
-    form0 = CodeSnipetForm()
-    form1 = UrlSnipetForm()
-    form2 = FileSnipetForm()
+    if request.method == 'POST':
+        form = BaseForm(request.POST)
+        form0 = CodeSnipetForm(request.POST)
+        form1 = UrlSnipetForm(request.POST)
+        form2 = FileSnipetForm(request.POST)
+        if form.is_valid():
+            # snipp_name = form.cleaned_data['snipp_name']
+            language = form.cleaned_data['language']
+            visible = form.cleaned_data['visible']
+            snip = Base(
+                # snipp_name=snipp_name,
+                language=language,
+                # code=code,
+                # file=file,
+                visible=visible,
+                created=datetime.datetime.now(),
+            )
+            snip.save()
+        if form0.is_valid():
+            code = form0.cleaned_data['code']
+            snip0 = CodeSnipet(code=code, )
+            snip0.save()
+        if form1.is_valid():
+            file_url = form1.cleaned_data['file_url']
+            snip1 = UrlSnipet(file_url=file_url,)
+            snip1.save()
+        if form2.is_valid():
+            try:
+                file = str(request.FILES['file'].read(), 'utf-8')
+            except MultiValueDictKeyError:
+                file = False
+            snip2 = FileSnipet(file=file,)
+            snip2.save()
+        return render(request, 'thanks.html', {
+            'path': request.build_absolute_uri,
+            # 'name': snipp_name
+        })
+
+    else:
+        form = BaseForm()
+        form0 = CodeSnipetForm()
+        form1 = UrlSnipetForm()
+        form2 = FileSnipetForm()
 
     return render(request, 'base.html', {
         'form': form,
