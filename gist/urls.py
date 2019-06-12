@@ -22,8 +22,9 @@ from gistapp import views
 from gist import settings
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
-    path('', views.get_file, name='get-file'),
+    path('admin/', admin.site.urls),
+    # path('', views.get_file, name='get-file'),
+    path('', views.index, name='index'),
     # path('snip_list', views.snip_list, name='snip_list'),
     # path('<snip_slug>/', views.snip, name='snip'),
 ]

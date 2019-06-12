@@ -1,10 +1,22 @@
 from django.shortcuts import render
 from django.utils.datastructures import MultiValueDictKeyError
 import datetime
+from django.forms import modelformset_factory
 
 from .forms import BaseForm, UrlSnipetForm, CodeSnipetForm, FileSnipetForm
 from .models import Base, UrlSnipet, CodeSnipet, FileSnipet
 # Create your views here.
+
+
+def index(request):
+    # lang = Base.objects.get(pk=lang_id)
+    langFormset = modelformset_factory(UrlSnipet, fields=('file_url',))
+
+    formSet = langFormset(queryset=UrlSnipet.objects.filter(lang_id=1))
+
+    return render(request, 'index.html', {'formset': formSet})
+
+
 
 def get_file(request):
     if request.method == 'POST':
